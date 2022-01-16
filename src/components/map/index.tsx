@@ -1,10 +1,15 @@
-import React from 'react';
-import MapView, {MapViewProps} from 'react-native-maps';
+import React, {useEffect} from 'react';
+import {MapViewProps} from 'react-native-maps';
+import {requestLocationPermission} from '../../utils/gps.utils';
+import {StyledMapView} from './styles';
 
 interface MapProps extends MapViewProps {}
 
 const Map: React.FunctionComponent<MapProps> = props => {
-  return <MapView {...props} showsUserLocation />;
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+  return <StyledMapView {...props} showsUserLocation showsMyLocationButton />;
 };
 
 export default Map;
